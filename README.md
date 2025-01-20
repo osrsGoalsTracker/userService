@@ -13,17 +13,6 @@ This service provides AWS Lambda functions for managing OSRS character associati
 - [Service Interfaces](docs/SERVICES.md) - Service layer interfaces and functionality
 - [Data Models](docs/MODELS.md) - Core data models and their relationships
 
-## Architecture
-
-### Domain Layer
-The service is organized into character-specific modules that handle core business logic for managing OSRS character data and user associations.
-
-### Orchestration Layer
-The orchestration layer manages interactions through events and provides:
-- Event models for character-related events
-- Event handlers for character operations
-- Event-driven workflows for character management
-
 ## Requirements
 
 - JDK 21
