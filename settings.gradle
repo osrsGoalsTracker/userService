@@ -1,0 +1,18 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        mavenLocal()  // Check local Maven repository first
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+rootProject.name = 'service'
+
+// Check if local goalTrackerDao exists
+def localGoalTrackerDaoDir = file('../goalTrackerDao')
+if (localGoalTrackerDaoDir.exists()) {
+    println "Local goalTrackerDao found at ${localGoalTrackerDaoDir.absolutePath}"
+} else {
+    println "Local goalTrackerDao not found at ${localGoalTrackerDaoDir.absolutePath}"
+} 

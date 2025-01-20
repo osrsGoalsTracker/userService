@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE import-control PUBLIC
+    "-//Checkstyle//DTD ImportControl Configuration 1.4//EN"
+    "https://checkstyle.org/dtds/import_control_1_4.dtd">
+
+<import-control pkg="com.osrsGoalTracker">
+    <!-- Allow all external dependencies -->
+    <allow pkg="com.google"/>
+    <allow pkg="lombok"/>
+    <allow pkg="org"/>
+    <allow pkg="javax"/>
+    <allow pkg="java"/>
+    <allow pkg="com.amazonaws"/>
+    <allow pkg="software.amazon"/>
+    <allow pkg="com.fasterxml"/>
+    <allow pkg="com.osrsGoalTracker"/>
+    <allow pkg="com.osrshiscores"/>
+
+    <!-- Allow all layers to use utils -->
+    <allow pkg="com.osrsGoalTracker.utils"/>
+
+    <!-- Modules can access everything -->
+    <subpackage name="modules">
+        <allow pkg="com.osrsGoalTracker"/>
+    </subpackage>
+
+    <!-- Service Layer -->
+    <subpackage name="service">
+        <allow pkg="com.osrsGoalTracker.service"/>
+        <allow pkg="com.osrsGoalTracker.domainlogic"/>
+        <allow pkg="com.osrsGoalTracker.modules"/>
+        <allow pkg="com.osrsGoalTracker.data.pojo"/>
+        <disallow pkg="com.osrsGoalTracker.data"/>
+        <disallow pkg="com.osrsGoalTracker.persistence"/>
+        <disallow pkg="com.osrsGoalTracker.dependency"/>
+    </subpackage>
+
+    <!-- Domain Logic Layer -->
+    <subpackage name="domainlogic">
+        <allow pkg="com.osrsGoalTracker.domainlogic"/>
+        <allow pkg="com.osrsGoalTracker.data"/>
+        <allow pkg="com.osrsGoalTracker.service.pojo"/>
+        <disallow pkg="com.osrsGoalTracker.service"/>
+        <disallow pkg="com.osrsGoalTracker.persistence"/>
+        <disallow pkg="com.osrsGoalTracker.dependency"/>
+    </subpackage>
+
+    <!-- Data Layer -->
+    <subpackage name="data">
+        <allow pkg="com.osrsGoalTracker.data"/>
+        <allow pkg="com.osrsGoalTracker.persistence"/>
+        <allow pkg="com.osrsGoalTracker.dependency"/>
+        <disallow pkg="com.osrsGoalTracker.service"/>
+        <disallow pkg="com.osrsGoalTracker.domainlogic"/>
+    </subpackage>
+
+    <!-- Persistence Layer -->
+    <subpackage name="persistence">
+        <allow pkg="com.osrsGoalTracker.persistence"/>
+        <disallow pkg="com.osrsGoalTracker.service"/>
+        <disallow pkg="com.osrsGoalTracker.domainlogic"/>
+        <disallow pkg="com.osrsGoalTracker.data"/>
+        <disallow pkg="com.osrsGoalTracker.dependency"/>
+    </subpackage>
+
+    <!-- Dependency Layer -->
+    <subpackage name="dependency">
+        <allow pkg="com.osrsGoalTracker.dependency"/>
+        <disallow pkg="com.osrsGoalTracker.service"/>
+        <disallow pkg="com.osrsGoalTracker.domainlogic"/>
+        <disallow pkg="com.osrsGoalTracker.data"/>
+        <disallow pkg="com.osrsGoalTracker.persistence"/>
+    </subpackage>
+</import-control> 
