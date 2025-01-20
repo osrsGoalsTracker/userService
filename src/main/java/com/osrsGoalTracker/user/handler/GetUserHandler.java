@@ -17,6 +17,10 @@ import com.osrsGoalTracker.user.service.UserService;
 
 import lombok.extern.log4j.Log4j2;
 
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_INTERNAL_ERROR;
+import static java.net.HttpURLConnection.HTTP_OK;
+
 /**
  * Lambda handler for retrieving user metadata.
  * This handler processes API Gateway events to retrieve user information.
@@ -25,9 +29,7 @@ import lombok.extern.log4j.Log4j2;
 public class GetUserHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
             .registerModule(new JavaTimeModule());
-    private static final int HTTP_OK = 200;
-    private static final int HTTP_BAD_REQUEST = 400;
-    private static final int HTTP_SERVER_ERROR = 500;
+
     private final UserService userService;
 
     /**
@@ -61,7 +63,7 @@ public class GetUserHandler implements RequestHandler<APIGatewayProxyRequestEven
             return createErrorResponse(HTTP_BAD_REQUEST, e.getMessage());
         } catch (Exception e) {
             log.error("Error processing request", e);
-            return createErrorResponse(HTTP_SERVER_ERROR, "Error processing request: " + e.getMessage());
+            return createErrorResponse(HTTP_INTERNAL_ERROR, "Error processing request: " + e.getMessage());
         }
     }
 
