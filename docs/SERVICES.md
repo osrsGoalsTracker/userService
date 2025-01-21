@@ -2,22 +2,24 @@
 
 ## Overview
 
-The service layer contains the core business logic of the application. Services follow these principles:
+The service layer contains the core business logic of the application. It exposes public interfaces for integration with other services while keeping implementation details internal. Services follow these principles:
 
-1. Interface-based design
+1. Interface-based design with public interfaces and internal implementations
 2. Constructor injection for dependencies
 3. Clear separation of concerns
 4. Transaction management
 5. Comprehensive error handling
 
-## Service Interfaces
+## Public Service Interfaces
 
-### User Service
+The following interfaces are part of the public API and should be used for integration with other services:
+
+### UserService
 
 ```java
 /**
  * Service interface for managing user operations.
- * This service provides methods to interact with user data in the domain layer.
+ * This interface is part of the public API and should be used for integration with other services.
  */
 public interface UserService {
     /**
@@ -39,6 +41,29 @@ public interface UserService {
 }
 ```
 
+## Integration Guidelines
+
+1. **External Integration**
+   - Only use the public service interfaces when integrating with other services
+   - Never depend on internal implementation details
+   - Use dependency injection to obtain service instances
+
+Example integration:
+```java
+@Inject
+public class OtherService {
+    private final UserService userService;
+
+    public OtherService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void someOperation(String userId) {
+        User user = userService.getUser(userId);
+        // ... use the user object
+    }
+}
+```
 
 ## Implementation Pattern
 

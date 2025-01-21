@@ -18,7 +18,7 @@
 
     <!-- User Domain -->
     <subpackage name="user">
-        <!-- Handler Layer -->
+        <!-- Handler Layer - Public API -->
         <subpackage name="handler">
             <allow pkg="com.osrsGoalTracker.user.handler"/>
             <allow pkg="com.osrsGoalTracker.user.service"/>
@@ -28,16 +28,18 @@
             <disallow pkg="com.osrsGoalTracker.user.external"/>
         </subpackage>
 
-        <!-- Service Layer -->
+        <!-- Service Layer - Public API -->
         <subpackage name="service">
             <allow pkg="com.osrsGoalTracker.user.service"/>
-            <allow pkg="com.osrsGoalTracker.user.repository"/>
             <allow pkg="com.osrsGoalTracker.user.model"/>
-            <allow pkg="com.osrsGoalTracker.user.external"/>
             <disallow pkg="com.osrsGoalTracker.user.handler"/>
+            <subpackage name="impl">
+                <allow pkg="com.osrsGoalTracker.user.repository"/>
+                <allow pkg="com.osrsGoalTracker.user.external"/>
+            </subpackage>
         </subpackage>
 
-        <!-- Repository Layer -->
+        <!-- Repository Layer - Internal Only -->
         <subpackage name="repository">
             <allow pkg="com.osrsGoalTracker.user.repository"/>
             <allow pkg="com.osrsGoalTracker.user.model"/>
@@ -46,7 +48,7 @@
             <disallow pkg="com.osrsGoalTracker.user.external"/>
         </subpackage>
 
-        <!-- Model Layer -->
+        <!-- Model Layer - Internal Only -->
         <subpackage name="model">
             <allow pkg="com.osrsGoalTracker.user.model"/>
             <disallow pkg="com.osrsGoalTracker.user.handler"/>
@@ -55,7 +57,7 @@
             <disallow pkg="com.osrsGoalTracker.user.external"/>
         </subpackage>
 
-        <!-- External Layer -->
+        <!-- External Layer - Internal Only -->
         <subpackage name="external">
             <allow pkg="com.osrsGoalTracker.user.external"/>
             <allow pkg="com.osrsGoalTracker.user.model"/>
@@ -64,7 +66,7 @@
             <disallow pkg="com.osrsGoalTracker.user.repository"/>
         </subpackage>
 
-        <!-- DI Layer -->
+        <!-- DI Layer - Internal Only -->
         <subpackage name="di">
             <allow pkg="com.osrsGoalTracker.user"/>
         </subpackage>

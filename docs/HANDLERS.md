@@ -2,12 +2,37 @@
 
 ## Overview
 
-The service exposes its functionality through AWS Lambda handlers. Each handler strictly follows a 4-step pattern:
+The service exposes its functionality through AWS Lambda handlers, which form part of the service's public API. Each handler is a public entry point for external consumers and strictly follows a 4-step pattern:
 
 1. Parse input from API Gateway event
 2. Validate input
 3. Run service function
 4. Return formatted response
+
+## Public API Endpoints
+
+The following handlers are part of the public API:
+
+### CreateUserHandler
+- **Path**: `POST /users`
+- **Package**: `com.osrsGoalTracker.user.handler.CreateUserHandler`
+- **Purpose**: Creates new users in the system
+- **Request**: `CreateUserRequest`
+- **Response**: `APIGatewayProxyResponseEvent` with created user
+
+### GetUserHandler
+- **Path**: `GET /users/{userId}`
+- **Package**: `com.osrsGoalTracker.user.handler.GetUserHandler`
+- **Purpose**: Retrieves user information
+- **Request**: Path parameter `userId`
+- **Response**: `APIGatewayProxyResponseEvent` with user details
+
+## Integration Guidelines
+
+1. **Lambda Integration**
+   - Lambda functions should only interact with these public handlers
+   - Handlers encapsulate all AWS-specific logic
+   - Never bypass handlers to access internal implementation details
 
 ## Implementation Pattern
 
@@ -42,22 +67,6 @@ public class SomeHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
     }
 }
 ```
-
-## Available Handlers
-
-### User Management
-
-#### CreateUserHandler
-- **Path**: `POST /users`
-- **Package**: `com.osrsGoalTracker.user.handler.CreateUserHandler`
-- **Request**: `CreateUserRequest`
-- **Response**: `APIGatewayProxyResponseEvent` with created user
-
-#### GetUserHandler
-- **Path**: `GET /users/{userId}`
-- **Package**: `com.osrsGoalTracker.user.handler.GetUserHandler`
-- **Request**: Path parameter `userId`
-- **Response**: `APIGatewayProxyResponseEvent` with user details
 
 ## Error Handling
 
